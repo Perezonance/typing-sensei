@@ -1,13 +1,17 @@
 package server
 
+import (
+	"github.com/perezonance/typing-sensei/lexicon-management-service/src/pkg/handlers"
+)
+
 type (
-	Config struct {
+	ServerConfig struct {
 
 	}
 )
 
-func NewServerConfig() (Config, error) {
+func NewServerConfig(c handlers.Config) (ServerConfig, error) {
 	//TODO: UNIMPLEMENTED
-	return Config{}, nil
+	return ServerConfig{}, nil
 }
 
