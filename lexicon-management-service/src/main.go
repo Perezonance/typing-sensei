@@ -1,12 +1,18 @@
 package main
 
 import (
+	"github.com/perezonance/typing-sensei/lexicon-management-service/src/pkg/handlers"
+
 	"fmt"
 	"net/http"
 )
 
 const (
 	root = "/api/v1"
+	port = "8080"
+	addr = "0.0.0.0"
+
+	fullAddr = addr + ":" + port
 )
 
 func main() {
@@ -14,9 +20,14 @@ func main() {
 }
 
 func startServer() error {
-	http.HandleFunc(root + "/lexicons/public", handlers.GenLexHandler)
-	http.HandleFunc(root + "/lexicons/:user", handlers.UserLexHandler)
+	//API for operations on public Lexicons
+	http.HandleFunc(root + "/lexicons/public", handlers.PublicLexHandler)
 
+	//API for operations on user Lexicons
+	http.HandleFunc(root + "/lexicons/users/:user_id", handlers.UserLexHandler)
 
-	return nil
+	fmt.Printf("Server listening on port:%v", port)
+
+	//TODO: change to ListenAndServeTLS()
+	return http.ListenAndServe(fullAddr, nil)
 }
