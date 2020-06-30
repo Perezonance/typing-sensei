@@ -4,6 +4,7 @@ import (
 	"github.com/perezonance/typing-sensei/lexicon-management-service/src/pkg/server"
 	"github.com/perezonance/typing-sensei/lexicon-management-service/src/pkg/storage"
 
+
 	guuid "github.com/google/uuid"
 
 	"net/http"
@@ -104,7 +105,12 @@ func parseRequest(r *http.Request) (ServerRequest, error) {
 	return ServerRequest{}, nil
 }
 
-func writeRes(w http.ResponseWriter, code int, message string) error {
-	//TODO: UNIMPLEMENTED
-	return nil
+func writeRes(statusCode int, message string, w http.ResponseWriter) {
+	w.WriteHeader(statusCode)
+	res := []byte(message)
+	_, err := w.Write(res)
+	if err != nil {
+		log.ErrorLog("Failed to write response", err)
+	}
+	return
 }
