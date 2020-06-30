@@ -24,10 +24,10 @@ func startServer() error {
 	http.HandleFunc(root + "/lexicons/public", handlers.PublicLexHandler)
 
 	//API for operations on user Lexicons
-	http.HandleFunc(root + "/lexicons/users/:user_id", handlers.UserLexHandler)
+	http.HandleFunc(root + "/lexicons/user/:user_id", handlers.UserLexHandler)
 
 	fmt.Printf("Server listening on port:%v", port)
 
-	//TODO: change to ListenAndServeTLS()
+	//TODO: change to ListenAndServeTLS()... maybe...
 	return http.ListenAndServe(fullAddr, nil)
 }
