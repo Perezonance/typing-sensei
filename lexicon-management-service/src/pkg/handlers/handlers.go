@@ -6,7 +6,6 @@ import (
 	"github.com/perezonance/typing-sensei/lexicon-management-service/src/pkg/storage"
 	log "github.com/perezonance/typing-sensei/sensei-light-logger/pkg/logger"
 
-
 	guuid "github.com/google/uuid"
 
 	"net/http"
@@ -27,12 +26,13 @@ func init () {
 	//Load the handler config...
 	c, err := NewConfig()
 	if err != nil {
-		log.ErrorLog("", err)
+		log.ErrorLog("failed to load general configuration", err)
 	}
 	conf = c
 }
 
 func PublicLexHandler(w http.ResponseWriter, r *http.Request) {
+	log.InfoLog("Entered")
 	corrID = getCorrelationID(r)
 	reqID = getRequestID(r)
 
